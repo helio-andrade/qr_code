@@ -3,6 +3,7 @@ import 'package:qrcode_reader/qrcode_reader.dart';
 
 void main() => runApp(MyApp());
 
+// The root widget of the application
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// The home page widget of the application
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -25,7 +27,9 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+// The state object for the MyHomePage widget
 class _MyHomePageState extends State<MyHomePage> {
+  // Method to capture a QR code
   void _captureQR() {
     Future<String> futureString = QRCodeReader().scan();
     futureString.then((qrText) {
@@ -33,16 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _showDialog(String qrtext) {
+  // Method to show a dialog with the scanned QR code text
+  void _showDialog(final String qrText) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Texto do QR Code"),
-          content: new Text(qrtext),
+          title: Text("Texto do QR Code"),
+          content: Text(qrText),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text("Fechar"),
+            FlatButton(
+              child: Text("Fechar"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -53,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // The build method for the MyHomePage widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
